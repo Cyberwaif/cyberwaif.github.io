@@ -1,5 +1,4 @@
-var proxy = 'SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080; DIRECT;';
-var rules = [
+var proxy = 'SOCKS5 127.0.0.1: 7890; SOCKS 127.0.0.1: 7890; DIRECT;'; var rules = [
     [
         [],
         []
@@ -3242,7 +3241,6 @@ var rules = [
             "makkahnewspaper.com",
             "malaysiakini.com",
             "mamingzhe.com",
-            "manus.im",
             "manchukuo.net",
             "mandiant.com",
             "mangafox.com",
@@ -6047,28 +6045,17 @@ var rules = [
             "zzux.com"
         ]
     ]
-];
-
-var lastRule = '';
-
-function FindProxyForURL(url, host) {
-    for (var i = 0; i < rules.length; i++) {
-        ret = testHost(host, i);
-        if (ret != undefined)
-            return ret;
-    }
-    return 'DIRECT';
-}
-
-function testHost(host, index) {
-    for (var i = 0; i < rules[index].length; i++) {
-        for (var j = 0; j < rules[index][i].length; j++) {
-            lastRule = rules[index][i][j];
-            if (host == lastRule || host.endsWith('.' + lastRule))
-                return i % 2 == 0 ? 'DIRECT' : proxy;
+]; var lastRule = ''; function FindProxyForURL(url, host) { for (var i = 0; i < rules.length; i++) { ret = testHost(host, i); if (ret != undefined) return ret;
+    } return 'DIRECT';
+} function testHost(host, index) { for (var i = 0; i < rules[index
+    ].length; i++) { for (var j = 0; j < rules[index
+        ][i
+        ].length; j++) { lastRule = rules[index
+            ][i
+            ][j
+            ]; if (host == lastRule || host.endsWith('.' + lastRule)) return i % 2 == 0 ? 'DIRECT' : proxy;
         }
-    }
-    lastRule = '';
+    } lastRule = '';
 }
 
 // REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith
